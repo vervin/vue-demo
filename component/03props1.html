@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="demo2">
+        <input v-model="parentMsg" placeholder="edit me">
+        <child v-bind:my-message="parentMsg"></child>
+        <p>Message is:{{ parentMsg }}</p>
+     
+
+    </div>
+
+
+    <script>
+        new Vue ({
+            el:'#demo2',
+            data:{
+                parentMsg:''
+            },
+            components:{
+                child:{
+                    props: ['myMessage'],
+                    template:'<p>{{myMessage}}</p>'
+                }
+            }
+
+         })
+
+    
+    </script>
+</body>
+
+</html>
