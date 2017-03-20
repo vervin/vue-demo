@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app-7">
+        <ol>
+            <todo-item  v-for="item in groceryList" v-bind:todo="item"></todo-item>
+        </ol>
+    </div>
+
+
+
+<script>
+     Vue.component('todo-item', {
+            props: ['todo'],//props:类似于一个自定义属性,这个属性名为 todo
+            template: '<li>{{ todo.text }}</li>'
+        })
+
+        var app7 = new Vue({
+            el: '#app-7',
+            data: {
+                groceryList: [{
+                        text: '蔬菜'
+                    },
+                    {
+                        text: '奶酪'
+                    },
+                    {
+                        text: '随便其他什么人吃的东西'
+                    }
+                ]
+            }
+        })
+</script>
+</body>
+
+</html>

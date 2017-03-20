@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo" class="static" v-bind:class="classObject">
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#demo',
+            data: {
+                classObject: {
+                    active: true,
+                    'text-danger': false
+                }
+            },
+            computed: {
+                classObject: function () {
+                    return {
+                        active: this.isActive && !this.error,
+                        'text-danger': this.error && this.error.type === 'fatal',
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

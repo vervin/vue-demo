@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="currency-input-example" class="demo">
+        <currency-input></currency-input>
+    </div>
+    <script>
+        Vue.component('currency-input', {
+            template: '\
+           <span>\
+             $\
+           <input\
+        ref="inputf"\
+        v-on:input="updateValue($event.target.value)"\
+      >\
+    </span>\
+           ',
+           //Event 对象代表事件的状态，比如事件在其中发生的元素、键盘按键的状态、鼠标的位置、鼠标按钮的状态。
+           //事件通常与函数结合使用，函数不会在事件发生前被执行！
+           //target 事件属性可返回事件的目标节点（触发该事件的节点），如生成事件的元素、文档或窗口。
+           //ref 被用来给元素或子组件引用信息，引用信息将会注册在父组件的 $refs 对象上
+           //如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素; 如果用在子组件上，引用就指向组件实例, 这里指向input元素
+            methods: {
+                updateValue: function (value) {
+                    var formattedValue = value.trim().slice(0, value.indexOf('.') + 3)
+                    if (formattedValue !== value) {
+                        this.$refs.inputf.value = formattedValue
+                    }// $refs:尽管有 props 和 events ，但是有时仍然需要在 JavaScript 中直接访问子组件。为此可以使用 ref 为子组件指定一个索引 ID 。
+                    //$refs 只在组件渲染完成后才填充，并且它是非响应式的。它仅仅作为一个直接访问子组件的应急方案——应当避免在模版或计算属性中使用 $refs 。
+                    this.$emit('input', Number(formattedValue))
+                }
+            }
+        })
+        new Vue({
+            el: '#currency-input-example',
+            data: {
+                price: 0
+            }
+        })
+    </script>
+</body>
+
+</html>
